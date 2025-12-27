@@ -36,12 +36,6 @@
             android:exported="false"
             android:theme="@style/Theme.LITERISEMOBILE" />
 
-        <!-- OTP Verification Activity -->
-        <activity
-            android:name="com.literise.ui.activities.OTPVerificationActivity"
-            android:exported="false"
-            android:theme="@style/Theme.LITERISEMOBILE" />
-
         <!-- Original MainActivity (can be removed later) -->
         <activity
             android:name=".MainActivity"

@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 import com.literise.R;
 import com.literise.data.mock.MockAuthData;
+import com.literise.models.Student;
 import com.literise.models.User;
+import com.literise.utils.SessionManager;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -20,11 +22,15 @@ public class RegisterActivity extends AppCompatActivity {
     private Button buttonRegister;
     private TextView textViewLogin;
     private ImageView buttonBack;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        // Initialize session manager
+        sessionManager = new SessionManager(this);
 
         // Initialize views
         editTextFullName = findViewById(R.id.editTextFullName);
@@ -66,25 +72,25 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Validation
         if (fullName.isEmpty()) {
-            editTextFullName.setError("Nama lengkap diperlukan");
+            editTextFullName.setError("Full name is required");
             editTextFullName.requestFocus();
             return;
         }
 
         if (childName.isEmpty()) {
-            editTextChildName.setError("Nama anak diperlukan");
+            editTextChildName.setError("Child's name is required");
             editTextChildName.requestFocus();
             return;
         }
 
         if (phone.isEmpty()) {
-            editTextPhone.setError("Nomor telepon diperlukan");
+            editTextPhone.setError("Phone number is required");
             editTextPhone.requestFocus();
             return;
         }
 
         if (password.isEmpty() || password.length() < 6) {
-            editTextPassword.setError("Password minimal 6 karakter");
+            editTextPassword.setError("Password must be at least 6 characters");
             editTextPassword.requestFocus();
             return;
         }
@@ -93,19 +99,31 @@ public class RegisterActivity extends AppCompatActivity {
         User newUser = MockAuthData.register(phone, fullName, childName, password);
 
         if (newUser != null) {
-            // Registration successful
-            Toast.makeText(this, "Registrasi berhasil! Verifikasi nomor telepon Anda.", Toast.LENGTH_LONG).show();
+            // Registration successful - auto verify and login
+            newUser.setVerified(true);
 
-            // Navigate to OTP verification
-            Intent intent = new Intent(RegisterActivity.this, OTPVerificationActivity.class);
-            intent.putExtra("phone_number", phone);
-            intent.putExtra("from_registration", true);
+            // Get associated student
+            Student student = MockAuthData.getStudentByUserId(newUser.getUserId());
+
+            // Create session
+            sessionManager.createLoginSession(
+                newUser.getUserId(),
+                newUser.getPhoneNumber(),
+                newUser.getFullName(),
+                student != null ? student.getStudentId() : -1
+            );
+
+            Toast.makeText(this, "Registration successful! Welcome to LiteRise!", Toast.LENGTH_LONG).show();
+
+            // Navigate to Login screen (or later: Welcome/Dashboard)
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
 
         } else {
             // Registration failed (user already exists)
-            Toast.makeText(this, "Nomor telepon sudah terdaftar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Phone number already registered", Toast.LENGTH_SHORT).show();
         }
     }
 }

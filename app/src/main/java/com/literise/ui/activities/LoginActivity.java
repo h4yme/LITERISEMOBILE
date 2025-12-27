@@ -84,15 +84,6 @@ public class LoginActivity extends AppCompatActivity {
 
         if (user != null) {
             // Login successful
-            if (!user.isVerified()) {
-                Toast.makeText(this, "Please verify your account first", Toast.LENGTH_SHORT).show();
-                // Navigate to OTP verification
-                Intent intent = new Intent(LoginActivity.this, OTPVerificationActivity.class);
-                intent.putExtra("phone_number", phone);
-                startActivity(intent);
-                return;
-            }
-
             // Get associated student
             Student student = MockAuthData.getStudentByUserId(user.getUserId());
 

@@ -140,7 +140,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Belum punya akun? "
+                android:text="@string/dont_have_account"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
@@ -148,7 +148,7 @@
                 android:id="@+id/textViewRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Daftar"
+                android:text="@string/sign_up"
                 android:textColor="@color/accent_yellow"
                 android:textSize="14sp"
                 android:textStyle="bold"
