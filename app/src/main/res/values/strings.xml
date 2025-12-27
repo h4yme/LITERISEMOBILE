@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">LITERISEMOBILE</string>
+    <string name="app_name">LiteRise</string>
+    <string name="tagline">Learn. Read. Rise!</string>
+    <string name="welcome">Welcome Back!</string>
+    <string name="login">Login</string>
+    <string name="register">Register Now</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="full_name">Your Name (Parent)</string>
+    <string name="child_name">Child\'s Name</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="dont_have_account">Don\'t have an account? </string>
+    <string name="already_have_account">Already have an account? </string>
+    <string name="sign_up">Sign Up</string>
+    <string name="log_in">Log In</string>
 </resources>
