@@ -12,15 +12,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LITERISEMOBILE"
         tools:targetApi="31">
+
+        <!-- Splash Screen (Launcher) -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name="com.literise.ui.activities.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.LITERISEMOBILE">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Login Activity -->
+        <activity
+            android:name="com.literise.ui.activities.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.LITERISEMOBILE" />
+
+        <!-- Register Activity -->
+        <activity
+            android:name="com.literise.ui.activities.RegisterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.LITERISEMOBILE" />
+
+        <!-- OTP Verification Activity -->
+        <activity
+            android:name="com.literise.ui.activities.OTPVerificationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.LITERISEMOBILE" />
+
+        <!-- Original MainActivity (can be removed later) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
